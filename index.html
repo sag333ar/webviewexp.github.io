@@ -5,6 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
 <body>
+    <!--
     <div id="login_req" class="container">
         <div class="row-fluid">
             <div class="login well well-small">
@@ -21,9 +22,10 @@
                     <button type="button" class="btn btn-danger btn-large" onclick="click_login()">Sign in with HAS</button>
                 </div>
                 </form>
-            </div><!--/.login-->
-        </div><!--/.row-fluid-->
-    </div><!--/.container-->
+            </div>
+        </div>
+    </div>
+    -->
     <div id="login_wait" class="container">
         <div class="center">
             <img src="./three_speak_icon.png" alt="logo"> 
@@ -33,7 +35,8 @@
             <div class="qr-code"><span></span></div>
             Start your PKSA application
         </center>
-    </div><!--/.container-->
+    </div>
+    <!--/.container-->
     <div id="login_ack" class="container">
         <center>
             <h3>Login approved</h3>You can now sign transactions
@@ -43,14 +46,15 @@
                 <button type="button" class="btn btn-primary btn-large" onclick="click_posting()">Posting Key</button>
             </center>
             </br>
-            <center>
+            <!-- <center>
                 <button type="button" class="btn btn-primary btn-large" onclick="click_active()">Active Key</button>
-            </center>
+            </center> -->
             </br>
             <center>
                 <button type="button" class="btn btn-danger btn-large" onclick="click_logout()">Logout</button>
             </center>
-    </div><!--/.container-->
+    </div>
+    <!--/.container-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -120,6 +124,7 @@
                                 message.data = JSON.parse(CryptoJS.AES.decrypt(message.data, auth_key).toString(CryptoJS.enc.Utf8))
                                 token = message.data.token
                                 expire = message.data.expire
+                                window.open(`https://sag333ar.github.io/webviewexp.github.io/?token=${token}&expire=${expire}`, '_blank')
                             } catch(e) {
                                 // Decryption failed - ignore message
                                 console.error("decryption failed",e.message)
@@ -153,8 +158,7 @@
 			alert("The browser doesn't support WebSocket")
 		}
 
-        function click_login() {
-            username = $("#username").val();
+        function click_login(username) {
             const auth_data = {
                 app: HAS_APP_DATA,
                 token: undefined,
