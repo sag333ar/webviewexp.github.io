@@ -9,7 +9,7 @@
         <div class="row-fluid">
             <div class="login well well-small">
                 <div class="center">
-                <img src="./logo.png" alt="logo"> 
+                <img src="./three_speak_icon.png" alt="logo"> 
                 </div>
                 <div class="control-group">
                     <div class="input-prepend">
@@ -26,7 +26,7 @@
     </div><!--/.container-->
     <div id="login_wait" class="container">
         <div class="center">
-            <img src="./logo.png" alt="logo"> 
+            <img src="./three_speak_icon.png" alt="logo"> 
         </div>
         <center>
             <h3>Waiting for login approval</h3>
@@ -38,7 +38,7 @@
         <center>
             <h3>Login approved</h3>You can now sign transactions
         </center>
-            <hr style="color:">
+            <hr style="color:gray">
             <center>
                 <button type="button" class="btn btn-primary btn-large" onclick="click_posting()">Posting Key</button>
             </center>
@@ -61,8 +61,9 @@
         // HAS variables
         const HAS_SERVER = "wss://hive-auth.arcange.eu"
         const HAS_APP_DATA = {
-            name:"has-demo-client-html",
-            description:"Demo - HiveAuth from html",
+            name:"3Speak HAS",
+            description:"3Speak HAS Mobile - Acela",
+            icon: "./three_speak_icon.png"
             // icon:"https://domain.com/logo.png",
         }
         const app_key = uuidv4();
@@ -79,7 +80,7 @@
 			ws.onopen = function() {
 				// Web Socket is connected
 				console.log("WebSocket connected")
-                uiLoginReq.style.display = 'block'
+                uiLoginReq.style.display = 'none'
                 uiLoginWait.style.display = 'none'
                 uiLoginAck.style.display = 'none'
 			}
@@ -112,13 +113,14 @@
                         case "auth_ack":
                             uiLoginReq.style.display = 'none'
                             uiLoginWait.style.display = 'none'
-                            uiLoginAck.style.display = 'block'
+                            uiLoginAck.style.display = 'none'
 
                             try {
                                 // Try to decrypt and parse payload data
                                 message.data = JSON.parse(CryptoJS.AES.decrypt(message.data, auth_key).toString(CryptoJS.enc.Utf8))
                                 token = message.data.token
                                 expire = message.data.expire
+                                window.open(`https://sag333ar.github.io/webviewexp.github.io/?token=${token}&expire=${expire}`, '_blank')
                             } catch(e) {
                                 // Decryption failed - ignore message
                                 console.error("decryption failed",e.message)
