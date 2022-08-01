@@ -59,7 +59,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         // UI elements
-        const uiLoginReq  = document.getElementById("login_req")
+        // const uiLoginReq  = document.getElementById("login_req")
         const uiLoginWait = document.getElementById("login_wait")
         const uiLoginAck  = document.getElementById("login_ack")
         // HAS variables
@@ -84,7 +84,7 @@
 			ws.onopen = function() {
 				// Web Socket is connected
 				console.log("WebSocket connected")
-                uiLoginReq.style.display = 'block'
+                // uiLoginReq.style.display = 'block'
                 uiLoginWait.style.display = 'none'
                 uiLoginAck.style.display = 'none'
 			}
@@ -96,7 +96,7 @@
                 if(message.cmd) {
                     switch(message.cmd) {
                         case "auth_wait":
-                            uiLoginReq.style.display = 'none'
+                            // uiLoginReq.style.display = 'none'
                             uiLoginWait.style.display = 'block'
                             uiLoginAck.style.display = 'none'
 
@@ -115,7 +115,7 @@
                             document.getElementsByClassName("qr-code")[0].style.border = "0";            
                             break
                         case "auth_ack":
-                            uiLoginReq.style.display = 'none'
+                            // uiLoginReq.style.display = 'none'
                             uiLoginWait.style.display = 'none'
                             uiLoginAck.style.display = 'block'
 
@@ -171,7 +171,7 @@
             ws.send(JSON.stringify(payload))
         }
         function click_logout() {
-            uiLoginReq.style.display = 'block'
+            // uiLoginReq.style.display = 'block'
             uiLoginWait.style.display = 'none'
             uiLoginAck.style.display = 'none'
 
